@@ -18,6 +18,14 @@ app.get('/schedule/:depotId', async (req, res) => {
     const depotData = await depotRes.json()
     const depot = depotData.depots.find(d => d.ID === depotId)
 
+
+
+
+
+
+
+
+    
     if (!depot) {
       await Log('backend', 'warn', 'handler', `depot ${depotId} not found`)
       return res.status(404).json({ error: 'depot not found' })
@@ -33,6 +41,9 @@ app.get('/schedule/:depotId', async (req, res) => {
     const vehicles = vehicleData.vehicles
 
     await Log('backend', 'info', 'service', `running schedule for ${vehicles.length} vehicles`)
+
+
+
 
     // to pick vehicles that max impact within hour budget using knapsack
     const n = vehicles.length
@@ -50,6 +61,11 @@ app.get('/schedule/:depotId', async (req, res) => {
         }
       }
     }
+
+
+
+
+
 
     // to trace back which vehicles got selected
     const selected = []
@@ -78,13 +94,9 @@ app.get('/schedule/:depotId', async (req, res) => {
   }
 })
 
-app.get('/debug', async (req, res) => {
-  const depotRes = await fetch(`${API}/depots`, {
-    headers: { 'Authorization': `Bearer ${TOKEN}` }
-  })
-  const data = await depotRes.json()
-  res.json(data)
-})
+
+
+
 
 
 app.listen(3001, () => {
