@@ -34,7 +34,7 @@ same as the first one but filtered to only unread
 
 for realtime i think websockets makes sense here. so when a new notification comes in it gets pushed to the student directly instead of them having to refresh
 
----
+
 
 ## Stage 2
 
@@ -56,7 +56,7 @@ problems i can think of as data grows:
 - if too many students load notifications at the same time the db will struggle
 - table will get huge over time if we never clean old notifications
 
----
+
 
 ## Stage 3
 
@@ -79,7 +79,7 @@ this way it goes directly to that students unread notifications without scanning
 
 also adding indexes on every column is a bad idea - it makes writes slower because every insert has to update all the indexes too
 
----
+
 
 ## Stage 4
 
@@ -92,7 +92,7 @@ tradeoffs:
 - for placement notifications this is a problem so id probably bypass cache for those
 - redis costs more since its in memory
 
----
+
 
 ## Stage 5
 
@@ -116,7 +116,7 @@ how id fix it:
 - push notification jobs to a queue instead of sending directly
 - have workers process the queue, if one fails it retries just that job not the whole thing
 
----
+
 
 ## Stage 6
 
